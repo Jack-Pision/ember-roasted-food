@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* EMBER Color Palette */
+  --page-bg: #F5F0E8;
+  --card-bg: #EDE4D3;
+  --headings: #1A1410;
+  --ember-red: #C8602A;
+  --warm-gold: #B8922A;
+  --herb-green: #3D6B41;
+  --muted-brown: #8C7355;
+  --dark-section: #2B2018;
+  --cream: #F5F0E8;
+  --body-text: #5c5449;
+
+  /* Animation easing */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-page-bg: var(--page-bg);
+  --color-card-bg: var(--card-bg);
+  --color-headings: var(--headings);
+  --color-ember-red: var(--ember-red);
+  --color-warm-gold: var(--warm-gold);
+  --color-herb-green: var(--herb-green);
+  --color-muted-brown: var(--muted-brown);
+  --color-dark-section: var(--dark-section);
+  --color-cream: var(--cream);
+  --color-body-text: var(--body-text);
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-jakarta);
+  --font-descriptive: var(--font-fraunces);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base styles */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--page-bg);
+  color: var(--body-text);
+  font-family: var(--font-jakarta), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: var(--font-playfair), serif;
+}
+
+.font-body {
+  font-family: var(--font-jakarta), sans-serif;
+}
+
+.font-descriptive {
+  font-family: var(--font-fraunces), serif;
+  font-style: italic;
+}
+
+/* Selection */
+::selection {
+  background: var(--ember-red);
+  color: white;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Pulse animation for cart */
+@keyframes cart-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.animate-cart-pulse {
+  animation: cart-pulse 300ms ease-out;
+}
+
+/* Scroll reveal animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays */
+.stagger-1 { transition-delay: 0ms; }
+.stagger-2 { transition-delay: 30ms; }
+.stagger-3 { transition-delay: 60ms; }
+.stagger-4 { transition-delay: 90ms; }
+.stagger-5 { transition-delay: 120ms; }
+.stagger-6 { transition-delay: 150ms; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-brown);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--headings);
+}
+
+/* Focus styles */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ember-red);
+  outline-offset: 2px;
+}
+
+/* Card hover shadow */
+.card-hover-shadow {
+  box-shadow: 0 12px 40px rgba(26, 20, 16, 0.10);
+}
+
+/* Parallax (desktop only) */
+@media (min-width: 641px) {
+  .parallax-bg {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 640px) {
+  .parallax-bg {
+    background-attachment: scroll;
+  }
 }
