@@ -2,7 +2,7 @@
 
 A modern, responsive food portfolio website built with Next.js 15, TypeScript, and Tailwind CSS.
 
-![EMBER Website](https://ember-demo.vercel.app)
+![EMBER](https://ember-food.vercel.app)
 
 ## Overview
 
